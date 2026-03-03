@@ -180,7 +180,19 @@ ENROLLMENT PROCEDURE:
 
 ===================== TUITION, SCHOLARSHIPS & DISCOUNTS =====================
 
-TUITION:
+SENIOR HIGH SCHOOL (SHS) TUITION — IMPORTANT:
+- Under the government's FREE education programs (such as the DepEd Senior High School
+  Voucher Program), eligible SHS students may study at AU ABC Campus with FREE TUITION.
+- ALWAYS mention this FIRST when asked about SHS tuition: "If you are eligible under
+  the government's SHS Voucher Program or other free education subsidies, you can study
+  Senior High School at AU ABC Campus for free!"
+- Only AFTER mentioning the free tuition option, add: "For students who are not covered
+  by government subsidies, tuition rates vary per strand. Please contact the Bursar's
+  Office at (02) 8-643-8157 for the current rates."
+- This free tuition benefit applies to Senior High School ONLY through government programs.
+  College and other levels have separate tuition rates and scholarship criteria.
+
+COLLEGE AND OTHER TUITION:
 - Tuition rates vary per program, year level, and number of units enrolled.
 - Payment modes: Full payment or installment basis.
 - For the exact current tuition schedule, contact the Bursar's Office at (02) 8-643-8157 or visit the campus.
@@ -293,6 +305,14 @@ async function sendMessage() {
   const text = userInput.value.trim();
   if (!text) return;
 
+  // Transition from welcome screen to chat view on first message
+  const welcomeSection = document.getElementById('welcomeSection');
+  if (welcomeSection) {
+    welcomeSection.remove();
+    chatBody.classList.add('active');
+    document.getElementById('appMain').classList.add('chatting');
+  }
+
   // 1. Show the user's message on screen
   appendMessage('user', text);
   userInput.value = '';
@@ -357,7 +377,10 @@ function appendMessage(role, text) {
   if (role === 'bot') {
     const avatar = document.createElement('div');
     avatar.classList.add('avatar');
-    avatar.textContent = 'AU';
+    const avatarImg = document.createElement('img');
+    avatarImg.src = 'logo.png';
+    avatarImg.alt = 'AU';
+    avatar.appendChild(avatarImg);
     wrapper.appendChild(avatar);
   }
 
@@ -383,7 +406,10 @@ function showTyping() {
 
   const avatar = document.createElement('div');
   avatar.classList.add('avatar');
-  avatar.textContent = 'AU';
+  const avatarImg = document.createElement('img');
+  avatarImg.src = 'logo.png';
+  avatarImg.alt = 'AU';
+  avatar.appendChild(avatarImg);
 
   const bubble = document.createElement('div');
   bubble.classList.add('bubble', 'typing-bubble');
@@ -425,6 +451,9 @@ function formatText(text) {
 // scrollToBottom — keeps the chat scrolled to the latest message
 // ----------------------------------------------------------------
 function scrollToBottom() {
+  // Scroll the main area (which is the overflow container in the new layout)
+  const appMain = document.getElementById('appMain');
+  if (appMain) appMain.scrollTop = appMain.scrollHeight;
   chatBody.scrollTop = chatBody.scrollHeight;
 }
 

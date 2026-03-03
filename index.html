@@ -4,63 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AU ABC Campus AI Assistant</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="chat-wrapper">
+  <div class="app">
 
-    <!-- ── Header ── -->
-    <div class="chat-header">
-      <div class="logo-circle">AU</div>
-      <div class="header-text">
-        <h1>Arellano University</h1>
-        <p class="subtitle">Andres Bonifacio Campus &nbsp;·&nbsp; <span class="dot"></span> AI Assistant</p>
+    <!-- ── Top header bar ── -->
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="logo.png" alt="AU" class="header-logo" />
+        <span class="header-title">AU ABC AI Assistant</span>
       </div>
-    </div>
+      <div class="header-status">
+        <span class="status-dot"></span>
+        <span class="status-text">Online</span>
+      </div>
+    </header>
 
-    <!-- ── Messages ── -->
-    <div class="chat-body" id="chatBody">
-      <!-- Welcome card -->
-      <div class="message bot-message">
-        <div class="avatar">AU</div>
-        <div class="bubble">
-          Hello! 👋 I'm the <strong>AU Andres Bonifacio Campus</strong> AI Assistant.<br><br>
-          Feel free to ask me anything about our campus — programs, admission, scholarships, and more!<br><br>
-          Go Chiefs! 💙❤️
-        </div>
+    <!-- ── Main content area ── -->
+    <main class="app-main" id="appMain">
+
+      <!-- Welcome screen (visible before first message) -->
+      <div class="welcome-section" id="welcomeSection">
+        <img src="logo.png" alt="AU Logo" class="welcome-logo" />
+        <h1 class="welcome-heading">
+          <span class="welcome-accent">&#10022;</span> Hello, Chief!
+        </h1>
+        <p class="welcome-sub">How can I help you today?</p>
       </div>
 
-      <!-- Quick suggestion chips -->
+      <!-- Chat messages (hidden until first message) -->
+      <div class="chat-messages" id="chatBody"></div>
+
+    </main>
+
+    <!-- ── Bottom input + chips ── -->
+    <div class="input-section">
+      <div class="input-box">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Ask about programs, admission, campus life…"
+          autocomplete="off"
+        />
+        <button id="sendBtn" onclick="sendMessage()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </div>
       <div class="suggestions" id="suggestions">
         <button class="chip" onclick="useSuggestion(this)">What programs are offered?</button>
-        <button class="chip" onclick="useSuggestion(this)">How do I apply for admission?</button>
-        <button class="chip" onclick="useSuggestion(this)">Are there scholarships available?</button>
-        <button class="chip" onclick="useSuggestion(this)">Where is the campus located?</button>
-        <button class="chip" onclick="useSuggestion(this)">What are the contact numbers?</button>
-        <button class="chip" onclick="useSuggestion(this)">SHS strands available?</button>
+        <button class="chip" onclick="useSuggestion(this)">How do I enroll?</button>
+        <button class="chip" onclick="useSuggestion(this)">Scholarships available?</button>
+        <button class="chip" onclick="useSuggestion(this)">SHS strands?</button>
+        <button class="chip" onclick="useSuggestion(this)">Campus contact info</button>
       </div>
-    </div>
-
-    <!-- ── Input ── -->
-    <div class="chat-footer">
-      <input
-        type="text"
-        id="userInput"
-        placeholder="Ask about programs, admission, campus life…"
-        autocomplete="off"
-      />
-      <button id="sendBtn" onclick="sendMessage()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
-          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- ── Footer branding ── -->
-    <div class="chat-brand">
-      AU Andres Bonifacio Campus · Pag-asa St., Brgy. Caniogan, Pasig City
+      <p class="footer-text">
+        AU Andres Bonifacio Campus &middot; Pag-asa St., Brgy. Caniogan, Pasig City
+      </p>
     </div>
 
   </div>
