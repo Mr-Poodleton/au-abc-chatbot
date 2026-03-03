@@ -168,7 +168,7 @@ async function sendMessage() {
     removeTyping(typingId);
     appendMessage('bot',
       '⚠️ Something went wrong. Please try again.\n\n' +
-      'If you are the developer: make sure GROQ_API_KEY is added in your Vercel Environment Variables.'
+      'Error details: ' + error.message
     );
     console.error('Chatbot error:', error);
   }
