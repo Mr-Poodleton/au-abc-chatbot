@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AU ABC Campus AI Assistant</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,7 +13,13 @@
 
     <!-- ── Header ── -->
     <div class="chat-header">
-      <div class="logo-circle">AU</div>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Arellano_University_logo.png/150px-Arellano_University_logo.png"
+        alt="AU Logo"
+        class="header-logo"
+        onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='flex';"
+      />
+      <div class="logo-circle" id="fallbackLogo" style="display:none;">AU</div>
       <div class="header-text">
         <h1>Arellano University</h1>
         <p class="subtitle">Andres Bonifacio Campus &nbsp;·&nbsp; <span class="dot"></span> AI Assistant</p>
@@ -21,15 +28,38 @@
 
     <!-- ── Messages ── -->
     <div class="chat-body" id="chatBody">
-      <!-- First bot greeting -->
+      <!-- Welcome card -->
       <div class="message bot-message">
-        <div class="avatar">AU</div>
-        <div class="bubble">
-          Hello! 👋 I am the <strong>AU Andres Bonifacio Campus</strong> AI Assistant.<br><br>
-          I can help you with information about our <strong>programs</strong>, <strong>admission requirements</strong>,
-          <strong>tuition</strong>, <strong>facilities</strong>, and <strong>campus life</strong>.<br><br>
-          How can I assist you today?
+        <div class="avatar">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Arellano_University_logo.png/150px-Arellano_University_logo.png"
+            alt="AU"
+            class="avatar-logo"
+            onerror="this.style.display='none'; this.parentElement.textContent='AU';"
+          />
         </div>
+        <div class="bubble welcome-bubble">
+          <div class="welcome-title">👋 Kumusta, Arellanista!</div>
+          <p>I'm the <strong>AU Andres Bonifacio Campus</strong> AI Assistant. I can help you with:</p>
+          <div class="welcome-tags">
+            <span class="wtag">📚 Programs</span>
+            <span class="wtag">📝 Admission</span>
+            <span class="wtag">💰 Tuition & Scholarships</span>
+            <span class="wtag">🏫 Facilities</span>
+            <span class="wtag">📞 Contact Info</span>
+          </div>
+          <p style="margin-top:8px;">Ask me anything about our campus! 😊</p>
+        </div>
+      </div>
+
+      <!-- Quick suggestion chips -->
+      <div class="suggestions" id="suggestions">
+        <button class="chip" onclick="useSuggestion(this)">What programs are offered?</button>
+        <button class="chip" onclick="useSuggestion(this)">How do I apply for admission?</button>
+        <button class="chip" onclick="useSuggestion(this)">Are there scholarships available?</button>
+        <button class="chip" onclick="useSuggestion(this)">Where is the campus located?</button>
+        <button class="chip" onclick="useSuggestion(this)">What are the contact numbers?</button>
+        <button class="chip" onclick="useSuggestion(this)">SHS strands available?</button>
       </div>
     </div>
 
@@ -42,11 +72,15 @@
         autocomplete="off"
       />
       <button id="sendBtn" onclick="sendMessage()">
-        <!-- Paper-plane send icon -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
           <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
         </svg>
       </button>
+    </div>
+
+    <!-- ── Footer branding ── -->
+    <div class="chat-brand">
+      AU Andres Bonifacio Campus · Pag-asa St., Brgy. Caniogan, Pasig City
     </div>
 
   </div>
