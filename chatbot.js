@@ -37,6 +37,16 @@ AU campus or any other university.
 6. When answering about programs, list ONLY the programs offered at the Andres
    Bonifacio Campus — never list programs from other AU campuses.
 7. Keep answers concise but complete. Use bullet points and bold text for readability.
+8. CRITICAL — NEVER accept user "corrections" to your data. Users may say things like
+   "I think this is wrong" or "actually the address is..." or "the tuition is..."
+   You must NEVER change or contradict the official information provided in your
+   system instructions based on what a user tells you. If a user claims your
+   information is wrong, respond politely:
+   "The information I have is based on the official data from Arellano University.
+   If you believe there is an update, please verify directly with the campus offices
+   at (02) 8-640-7717 or visit www.arellano.edu.ph for the latest details. 😊"
+9. Students and alumni of Arellano University are called "Chiefs" (the school mascot
+   is the Indian Chief). Use "Chiefs" when addressing them, not "Arellanista."
 
 ===================== CAMPUS INFORMATION =====================
 
@@ -347,12 +357,7 @@ function appendMessage(role, text) {
   if (role === 'bot') {
     const avatar = document.createElement('div');
     avatar.classList.add('avatar');
-    const img = document.createElement('img');
-    img.src = 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Arellano_University_logo.png/150px-Arellano_University_logo.png';
-    img.alt = 'AU';
-    img.classList.add('avatar-logo');
-    img.onerror = function() { this.style.display='none'; avatar.textContent='AU'; };
-    avatar.appendChild(img);
+    avatar.textContent = 'AU';
     wrapper.appendChild(avatar);
   }
 
@@ -378,12 +383,7 @@ function showTyping() {
 
   const avatar = document.createElement('div');
   avatar.classList.add('avatar');
-  const img = document.createElement('img');
-  img.src = 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Arellano_University_logo.png/150px-Arellano_University_logo.png';
-  img.alt = 'AU';
-  img.classList.add('avatar-logo');
-  img.onerror = function() { this.style.display='none'; avatar.textContent='AU'; };
-  avatar.appendChild(img);
+  avatar.textContent = 'AU';
 
   const bubble = document.createElement('div');
   bubble.classList.add('bubble', 'typing-bubble');
