@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AU ABC Campus AI Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="chat-wrapper">
+
+    <!-- ── Header ── -->
+    <div class="chat-header">
+      <div class="logo-circle">AU</div>
+      <div class="header-text">
+        <h1>Arellano University</h1>
+        <p class="subtitle">Andres Bonifacio Campus &nbsp;·&nbsp; <span class="dot"></span> AI Assistant</p>
+      </div>
+    </div>
+
+    <!-- ── Messages ── -->
+    <div class="chat-body" id="chatBody">
+      <!-- First bot greeting -->
+      <div class="message bot-message">
+        <div class="avatar">AU</div>
+        <div class="bubble">
+          Hello! 👋 I am the <strong>AU Andres Bonifacio Campus</strong> AI Assistant.<br><br>
+          I can help you with information about our <strong>programs</strong>, <strong>admission requirements</strong>,
+          <strong>tuition</strong>, <strong>facilities</strong>, and <strong>campus life</strong>.<br><br>
+          How can I assist you today?
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Input ── -->
+    <div class="chat-footer">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Ask about programs, admission, campus life…"
+        autocomplete="off"
+      />
+      <button id="sendBtn" onclick="sendMessage()">
+        <!-- Paper-plane send icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>
