@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${apiKey}`   // ← key used here, server-side only
       },
       body: JSON.stringify({
-        model: 'llama3-8b-8192',   // Free, fast Groq model
+        model: 'llama-3.1-8b-instant',   // Free, fast Groq model
         messages: [
           // System instructions come first — this enforces the AU ABC topic restriction
           { role: 'system', content: systemInstructions },
