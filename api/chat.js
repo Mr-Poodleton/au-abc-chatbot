@@ -52,33 +52,53 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Call the Groq AI API
-    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`   // ← key used here, server-side only
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',   // Free, fast Groq model
-        messages: [
-          // System instructions come first — this enforces the AU ABC topic restriction
-          { role: 'system', content: systemInstructions },
-          // Then the actual conversation history
-          ...messages
-        ],
-        temperature: 0.5,    // Lower = more consistent, focused answers
-        max_tokens: 1024
-      })
-    });
+    // Keep only last 20 messages to avoid hitting token limits
+    const trimmedMessages = messages.slice(-20);
 
-    // Handle Groq API errors
-    if (!groqRes.ok) {
-      const groqErr = await groqRes.json();
-      console.error('Groq API error:', groqErr);
-      return res.status(502).json({
-        error: 'Could not reach the AI service. Check your GROQ_API_KEY in Vercel settings.'
+    // Retry logic — Groq free tier can have transient failures / rate limits
+    let groqRes;
+    let lastError;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: 'llama-3.1-8b-instant',
+          messages: [
+            { role: 'system', content: systemInstructions },
+            ...trimmedMessages
+          ],
+          temperature: 0.5,
+          max_tokens: 1024
+        })
       });
+
+      if (groqRes.ok) break;
+
+      // Parse the error
+      let errBody;
+      try { errBody = await groqRes.json(); } catch { errBody = {}; }
+      lastError = errBody;
+      console.error(`Groq attempt ${attempt} failed (${groqRes.status}):`, errBody);
+
+      // If rate-limited (429), wait before retrying
+      if (groqRes.status === 429 && attempt < 3) {
+        await new Promise(r => setTimeout(r, attempt * 2000));
+        continue;
+      }
+
+      // For other errors, don't retry
+      if (groqRes.status !== 429) break;
+    }
+
+    // Handle final failure
+    if (!groqRes.ok) {
+      const errMsg = lastError?.error?.message || `Groq API returned ${groqRes.status}`;
+      console.error('Groq final error:', lastError);
+      return res.status(502).json({ error: errMsg });
     }
 
     // Extract the AI's reply
