@@ -40,8 +40,6 @@ module.exports = async function handler(req, res) {
 
   // Read the API key from Vercel's private Environment Variables
   // You set this in: Vercel Dashboard → Your Project → Settings → Environment Variables
-  // Name : GROQ_API_KEY
-  // Value: gsk_xxxxxxxxxxxxxxxxxxxxxxxx  (your actual key)
   const apiKey = process.env.GROQ_API_KEY;
 
   if (!apiKey) {
@@ -63,7 +61,7 @@ module.exports = async function handler(req, res) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
+          'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           model: 'llama-3.1-8b-instant',
